@@ -3,16 +3,18 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                echo 'Checking out source code...'
-            }
-        }
-
         stage('Build') {
             steps {
                 dir('myproject') {
                     bat 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                dir('myproject') {
+                    bat 'docker build -t myproject:v1 .'
                 }
             }
         }

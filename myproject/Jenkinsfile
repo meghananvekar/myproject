@@ -18,6 +18,13 @@ pipeline {
                 }
             }
         }
-
+        stage('Docker Push') {
+           steps {
+               dir('myproject') {
+                  bat 'docker tag myproject:v1 megha3/myproject:v1'
+                  bat 'docker push megha3/myproject:v1'
+                }
+            }
+        }
     }
 }

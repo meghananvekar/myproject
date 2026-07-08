@@ -14,16 +14,14 @@ pipeline {
         stage('Docker Build') {
             steps {
                 dir('myproject') {
-                    bat 'docker build -t myproject:v1 .'
+                    bat 'docker build -t megha3/myproject:%BUILD_NUMBER% .'
                 }
             }
         }
+
         stage('Docker Push') {
-           steps {
-               dir('myproject') {
-                  bat 'docker tag myproject:v1 megha3/myproject:v1'
-                  bat 'docker push megha3/myproject:v1'
-                }
+            steps {
+                bat 'docker push megha3/myproject:%BUILD_NUMBER%'
             }
         }
     }
